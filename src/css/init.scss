@@ -1,0 +1,76 @@
+@font-face {
+    font-family: Emoji;
+    src:
+        local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol"),
+        local("Noto Color Emoji");
+    unicode-range: U+1F000-1F644, U+203C-3299;
+}
+
+html,
+body {
+    font-family:
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Emoji,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8a8a8;
+}
+
+::-webkit-scrollbar-track {
+    border: 1px solid #f5f5f5;
+}
+
+// 设置表格的行高 编辑默认48
+.q-table thead tr,
+.q-table tbody td {
+    height: 40px;
+}
+
+a {
+    text-decoration: none;
+}
+
+// 该样式为 输入框前面的文本的 单独样式 不要混淆
+.prefix-text {
+    color: var(--text-4, #4e5969);
+    text-align: right;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+// table组件复选框的样式
+.q-checkbox__inner--truthy,
+.q-checkbox__inner--indet {
+    color: var(--q-primary) !important;
+}
+
+// 修改默认的按钮样式
+.q-btn {
+    z-index: 1;
+    font-size: 12.4px;
+}
+
+// 修改 q-tree 选中的背景色
+.q-tree__node--selected {
+    background-color: #eeeeee;
+}

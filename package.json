@@ -1,0 +1,70 @@
+{
+    "name": "quasar-ts-template",
+    "version": "0.0.1",
+    "description": "quasar-ts-template",
+    "productName": "quasar-ts-template",
+    "type": "module",
+    "packageManager": "pnpm@9.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "cross-env MODE=development quasar dev",
+        "preview": "cross-env MODE=preview quasar dev",
+        "build:preview": "cross-env MODE=preview quasar build",
+        "build": "cross-env MODE=production quasar build",
+        "lint": "eslint -c eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
+        "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+        "postinstall": "quasar prepare && git add --renormalize . || true",
+        "prepare": "simple-git-hooks",
+        "deploy:preview": "pnpm run build:preview && scp -r preview/* ubuntu@124.221.202.195:/usr/local/nginx/html/zhongtie_1"
+    },
+    "dependencies": {
+        "@quasar/extras": "^1.17.0",
+        "axios": "^1.13.1",
+        "pinia": "^3.0.3",
+        "quasar": "^2.18.5",
+        "vue": "^3.5.22",
+        "vue-i18n": "^11.1.12",
+        "vue-router": "4.6.3"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.38.0",
+        "@quasar/app-vite": "^2.4.0",
+        "@types/crypto-js": "^4.2.2",
+        "@types/node": "^24.9.2",
+        "@vue/eslint-config-prettier": "^10.2.0",
+        "@vue/eslint-config-typescript": "^14.6.0",
+        "autoprefixer": "^10.4.21",
+        "cross-env": "^10.1.0",
+        "crypto-js": "^4.2.0",
+        "eslint": "^9.38.0",
+        "eslint-plugin-vue": "^10.5.1",
+        "globals": "^16.4.0",
+        "lint-staged": "^16.2.6",
+        "pinia-plugin-persistedstate": "^4.5.0",
+        "prettier": "^3.6.2",
+        "simple-git-hooks": "^2.13.1",
+        "typescript": "^5.9.3",
+        "vite-plugin-checker": "^0.11.0",
+        "vite-plugin-compression": "^0.5.1",
+        "vue-eslint-parser": "^10.2.0",
+        "vue-tsc": "^3.1.2"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "pnpm lint-staged",
+        "pre-push": "git pull --rebase",
+        "post-merge": "pnpm prepare"
+    },
+    "lint-staged": {
+        "*.{js,vue}": [
+            "eslint --fix",
+            "prettier --write --end-of-line lf"
+        ],
+        "*.{json,scss,html,md}": [
+            "prettier --write --end-of-line lf"
+        ]
+    },
+    "engines": {
+        "node": "^28 || ^26 || ^24 || ^22",
+        "pnpm": ">= 9.0.0"
+    }
+}
