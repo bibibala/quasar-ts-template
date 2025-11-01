@@ -17,4 +17,4 @@ type ExtractKeysOnly<T> = T extends object
 
 export type I18nMessageKeys = NestedKeyOf<ExtractKeysOnly<typeof enUS>>;
 
-export type I18nMessageStructure = ExtractKeysOnly<typeof enUS>;
+// export type I18nMessageStructure = ExtractKeysOnly<typeof enUS>;

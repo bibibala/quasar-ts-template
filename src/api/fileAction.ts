@@ -1,10 +1,25 @@
 import useToast from "src/utils/useToast";
 import { http } from "src/plugins/useAxios";
 import xhr from "src/utils/useRequest.js";
+import { Key } from "src/utils/useKey";
+import { LanguageType } from "src/types/Language-type";
 
 interface ErrorResponse {
     msg: string;
 }
+
+const message = {
+    [LanguageType.ZH]: {
+        error: "下载失败",
+        success: "下载成功",
+    },
+    [LanguageType.EN]: {
+        error: "Download failed",
+        success: "Download success",
+    },
+};
+
+const isZH = Key.getLangLa() === LanguageType.ZH;
 
 export async function downloadFile(data: any, url: string) {
     const res = await http({
@@ -19,7 +34,9 @@ export async function downloadFile(data: any, url: string) {
         reader.onload = (result) => {
             const parseResult = JSON.parse(result.target!.result as string) as ErrorResponse;
             const { msg } = parseResult;
-            useToast.showError(`下载失败，${msg}`);
+            useToast.showError(
+                `${isZH ? message[LanguageType.ZH].error : message[LanguageType.EN].error}，${msg}`,
+            );
         };
     } else {
         const link = document.createElement("a");
@@ -37,9 +54,11 @@ export async function downloadFile(data: any, url: string) {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            useToast.showSuccess("文件下载成功");
+            useToast.showSuccess(
+                `${isZH ? message[LanguageType.ZH].success : message[LanguageType.EN].success}`,
+            );
         } else {
-            useToast.showError("无法解析文件名");
+            console.error("无法解析文件名");
         }
     }
 }
